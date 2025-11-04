@@ -4,7 +4,7 @@
 }
 
 body{
-    background-color: rgb(237, 216, 216);
+    background-color: #F0D8E6;
 }
 
 header{
@@ -26,4 +26,55 @@ header{
     background-color: rgb(21, 11, 131);
     cursor: pointer;
     transition: 0.8s;
+}
+
+#highlight-section{
+    width: 70%;
+    margin: 50px auto;
+}
+
+#highlight-section > h2{
+    font-size: 50px;
+    font-weight: 800;
+    text-align: center;
+    text-shadow: 2px 2px 8px #af3d3d;
+    margin-bottom: 25px;
+}
+
+#highlight-section > p{
+    margin: 0 auto;
+    width: 50%;
+    color: rgb(89, 85, 85);
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+#buy-now-button{
+    display: flex;
+    justify-content: center;
+}
+
+.buy-btn{
+    background-color: rgb(255, 87, 51);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+}
+
+.buy-btn:hover{
+    background-color: rgb(180, 50, 20);
+    cursor: pointer;
+    transition: 0.6s;
+    transform: scale(1.08);
+}
+
+#cover-image-section{
+    border: 2px solid black;
+    width: 70%;
+    margin: 50px auto;
+}
+
+#cover-image-section img{
+    width: 100%;
 }
