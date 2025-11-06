@@ -147,6 +147,7 @@ header{
 .card-image:hover{
     background-color: #d7c2c2;
     transition: 0.8s;
+    cursor: pointer;
 }
 
 .card-image img{
