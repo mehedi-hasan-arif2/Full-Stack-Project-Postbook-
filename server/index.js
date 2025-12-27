@@ -1,3 +1,10 @@
+// index.js (Backend)
+app.use(cors({
+    origin: "*", 
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type"]
+}));
+
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
@@ -20,7 +27,6 @@ var db = mysql.createConnection({
   connectTimeout: 10000
 });
 
-// কানেকশন চেক - throw err বাদ দেওয়া হয়েছে যাতে সার্ভার বন্ধ না হয়
 db.connect((err) => {
   if (err) {
     console.error("Error connecting to MySQL database:", err.message);
