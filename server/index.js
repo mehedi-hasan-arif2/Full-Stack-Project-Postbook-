@@ -18,7 +18,8 @@ var db = mysql.createConnection({
   user: "umqfljlucaz6j5ul",
   password: "6IjEt8QePsp8NRfu25UD", 
   database: "bwikb3gj9wva2xsnblei",
-  port: 3306
+  port: 3306,
+  connectTimeout: 10000 
 });
 
 db.connect((err) => {
