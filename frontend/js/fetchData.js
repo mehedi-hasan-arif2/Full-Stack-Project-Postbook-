@@ -1,3 +1,5 @@
+const API_URL = "https://full-stack-project-postbook.onrender.com";
+
 const showLoggedUsername = () => {
     const userNameElement = document.getElementById("logged-username");
     let user = localStorage.getItem("loggedInuser");
@@ -21,7 +23,7 @@ const logOut = () => {
 
 const fetchAllPosts = async () => {
     try {
-        const res = await fetch("http://localhost:5000/getAllPosts");
+        const res = await fetch(`${API_URL}/getAllPosts`);
         const data = await res.json();
         showAllPosts(data);
     } catch (err) {
@@ -136,7 +138,7 @@ const showAllPosts = (allPosts) => {
         // --- Event Listeners for Post Delete/Edit ---
         postActionsDiv.querySelector('.delete-btn').addEventListener('click', async () => {
             if (!confirm("Delete this post?")) return;
-            await fetch(`http://localhost:5000/deletePost/${post.postId}/${loggedUser.userId}`, { method: "DELETE" });
+            await fetch(`${API_URL}/deletePost/${post.postId}/${loggedUser.userId}`, { method: "DELETE" });
             location.reload();
         });
 
@@ -144,7 +146,7 @@ const showAllPosts = (allPosts) => {
             const newText = prompt("Edit text:", post.postText);
             const newImage = prompt("Edit image URL:", post.postImageUrl);
             if (!newText) return;
-            await fetch("http://localhost:5000/editPost", {
+            await fetch(`${API_URL}/editPost`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ postId: post.postId, postText: newText, postImageUrl: newImage, userId: loggedUser.userId })
@@ -169,7 +171,7 @@ const handlePostComment = async (postId) => {
         commentTime: now.toISOString(),
     };
 
-    await fetch('http://localhost:5000/postComment', {
+    await fetch(`${API_URL}/postComment`, {
         method: 'POST',
         headers: { "content-type": "application/json" },
         body: JSON.stringify(commmentObject),
@@ -179,7 +181,7 @@ const handlePostComment = async (postId) => {
 
 const fetchAllCommentsOfAPost = async (postId) => {
     try {
-        const res = await fetch(`http://localhost:5000/getAllComments/${postId}`);
+        const res = await fetch(`${API_URL}/getAllComments/${postId}`);
         return await res.json();
     } catch (err) {
         return [];
@@ -195,7 +197,7 @@ const handleAddNewPost = async () => {
     let now = new Date();
     now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
 
-    await fetch('http://localhost:5000/addNewPost', {
+    await fetch(`${API_URL}/addNewPost`, {
         method: 'POST',
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ postedUserId: user.userId, postedTime: now.toISOString(), postText, postImageUrl }),
@@ -208,7 +210,7 @@ const changeProfileImage = async () => {
     if (!newImageUrl) return;
     let user = JSON.parse(localStorage.getItem("loggedInuser"));
 
-    const res = await fetch("http://localhost:5000/updateProfileImage", {
+    const res = await fetch(`${API_URL}/updateProfileImage`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId: user.userId, userImage: newImageUrl })
@@ -224,7 +226,7 @@ const changeProfileImage = async () => {
 const handleDeleteComment = async (commentId, postOwnerId) => {
     if (!confirm("Delete comment?")) return;
     let user = JSON.parse(localStorage.getItem("loggedInuser"));
-    await fetch(`http://localhost:5000/deleteComment/${commentId}/${user.userId}/${postOwnerId}`, { method: "DELETE" });
+    await fetch(`${API_URL}/deleteComment/${commentId}/${user.userId}/${postOwnerId}`, { method: "DELETE" });
     location.reload();
 };
 
@@ -232,7 +234,7 @@ const handleEditComment = async (commentId, oldText) => {
     const newText = prompt("Edit comment:", oldText);
     if (!newText || newText === oldText) return;
     let user = JSON.parse(localStorage.getItem("loggedInuser"));
-    await fetch("http://localhost:5000/editComment", {
+    await fetch(`${API_URL}/editComment`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ commentId, commentText: newText, userId: user.userId })
@@ -243,7 +245,7 @@ const handleEditComment = async (commentId, oldText) => {
 const handleDeleteAccount = async () => {
     if (!confirm("Delete account forever?")) return;
     let user = JSON.parse(localStorage.getItem("loggedInuser"));
-    const res = await fetch(`http://localhost:5000/deleteUser/${user.userId}`, { method: "DELETE" });
+    const res = await fetch(`${API_URL}/deleteUser/${user.userId}`, { method: "DELETE" });
     const data = await res.json();
     if (data.success) {
         localStorage.clear();
