@@ -14,10 +14,11 @@ app.use(express.json());
 // making connetion with MySQL server
 
 var db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: '',
-  database: "postbook",
+  host: "bwikb3gj9wva2xsnblei-mysql.services.clever-cloud.com",
+  user: "umqfljlucaz6j5ul",
+  password: "6IjEt8QePsp8NRfu25UD", 
+  database: "bwikb3gj9wva2xsnblei",
+  port: 3306
 });
 
 db.connect((err) => {
